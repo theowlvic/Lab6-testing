@@ -1,8 +1,5 @@
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import RecognizerResult, OperatorConfig
-text = input("text: ")
-start = int(input("start: "))
-end = int(input("end: "))
 def sample_run_anonymizer(text, start, end):
     # Initialize the engine
     engine = AnonymizerEngine()
@@ -11,7 +8,7 @@ def sample_run_anonymizer(text, start, end):
     # analyzer results (potentially coming from presidio-analyzer) and
     # Operators to get the anonymization output:
     result = engine.anonymize(
-        text,
+        text=text,
         analyzer_results=[RecognizerResult(entity_type="PERSON", start=start, end=end, score=0.8)],
         operators={"PERSON": OperatorConfig("replace", {"new_value": "BIP"})}
     )
@@ -32,5 +29,7 @@ def sample_run_anonymizer(text, start, end):
     # ]
 
 if __name__ == "__main__":
-
+    text = input("text: ")
+    start = int(input("start: "))
+    end = int(input("end: "))
     result = sample_run_anonymizer(text, start, end);
